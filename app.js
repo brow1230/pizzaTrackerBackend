@@ -9,7 +9,7 @@ const app = express();
 // app.use(sanitizeMongo());
 app.use(express.json());
 //basic path. not final
-app.use('/api/path', require('./routes/pizza.js'))
+app.use('/api/path', require('./routes/pizzaRouter.js/index.js'))
 //other path here
 //auth path here
 
