@@ -36,6 +36,6 @@ const schema = new mongoose.Schema({
     }
 })
 
-const Model = mongoose.model('Pizzas', schema)
+const Model = mongoose.model('Pizza', schema)
 
 module.exports = Model;
