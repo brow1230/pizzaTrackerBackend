@@ -1,7 +1,8 @@
 # Pizza Tracking thing.
-###We need a name, this really isn't a good one.
 
-#*Changes*
+## We need a name, this really isn't a good one.
+
+# *Changes*
 
 A11:
     Made schemas models for everything... Still need to add the functions in them though.
