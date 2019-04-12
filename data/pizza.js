@@ -27,12 +27,10 @@ const schema = new mongoose.Schema({
         maxlength: 1024
     },
     ingredient: {
-        type: Schema.Types.ObjectId,
-        ref: 'Ingredient'
+        type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient'}]
     },
     extraToppings:{
-        type: Schema.Types.ObjectId,
-        ref: 'Ingredient'
+        type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient'}]
     }
 })
 
