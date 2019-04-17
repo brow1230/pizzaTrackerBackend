@@ -1,9 +1,9 @@
-const debug = require('debug')('database:MongoDB')
+const debug = require('debug')('app:db')
 const mongoose = require('mongoose')
 
 module.exports = () => {
     mongoose.connect(
-        'mongodv://localhost:27017/mad9124',
+        `mongodb://localhost:27017/mad9124`,
         {useNewUrlParser:true}
     )
     .then(()=>{

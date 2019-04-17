@@ -10,7 +10,7 @@ const sanitize = sourceString => {
 }
 
 const stripTags = payload => {
-    let attributes = [...payload];
+    let attributes = {...payload};
     for (let key in attributes){
         if(attributes[key] instanceof Array){
             debug('recursive Array', attributes[key])

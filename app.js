@@ -16,6 +16,5 @@ app.use('/api/auth', require('./routes/auth/index'))
 //auth path here
 
 
-
-const PORT = process.env.PORT || 3030
-app.listen(PORT, () => {console.log(`app.js started, Listening on port ${PORT}`)} )
+const port = process.env.PORT || 3030
+app.listen(port, () => {debug(`app.js started, Listening on port ${port}`)} )
