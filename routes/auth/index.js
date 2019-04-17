@@ -2,7 +2,7 @@ const router = require('express').Router()
 const User = require('../../data/User')
 const sanitizeBody = require('../../middleware/sanitizeBody')
 const authorize = require('../../middleware/auth')
-
+const debug = require('debug')('app:authRouter')
 
 router.post('/users', sanitizeBody, async(req,res) => {
     try{
@@ -10,6 +10,7 @@ router.post('/users', sanitizeBody, async(req,res) => {
         const itExists = !!(await User.countDocuments({
             user: newUser.email
         }))
+        debug("Does it exist " + itExists)
         if (itExists){
             return res.status(400).send({
                 errors: [{
@@ -37,6 +38,7 @@ router.post('/users', sanitizeBody, async(req,res) => {
         })
     }
 })
+
 router.patch('/users', sanitizeBody, async(req,res) => {
     try{
         let newPassword = req.sanitzedBody
@@ -54,27 +56,26 @@ router.patch('/users', sanitizeBody, async(req,res) => {
         })
     }
 })
-// router.post('/users/tokens', sanitizeBody, async(req,res) => {
-//     const {email, password} = req.sanitzedBody
-//     const user = await User.authenticate(email,password)
-//     if(!user){
-//         return res.status(404).send({
-//             error: [
-//                 {
-//                     status: "Unauthorized",
-//                     code: "401",
-//                     title: "Incorrect username or password"
-//                 }
-//             ]
-//         })
-//     }
-// })
 
+router.post('/users/token', sanitizeBody, async(req,res) => {
+    const {email, password} = req.sanitzedBody
+    const user = await User.authenticate(email,password)
+    if(!user){
+        return res.status(404).send({
+            error: [
+                {
+                    status: "Unauthorized",
+                    code: "401",
+                    title: "Incorrect username or password"
+                }
+            ]
+        })
+    }
+})
 
-
-// router.get('/users/me', authroize,async(req,res) =>{
-//     const user = await User.findById(req.user._id)
-//     res.send({data:user})
-// })
+router.get('/users/me', authorize ,async(req,res) =>{
+    const user = await User.findById(req.user._id)
+    res.send({data:user})
+})
 
 module.exports = router

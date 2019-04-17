@@ -6,7 +6,7 @@ const app = express();
 
 require('./startup/database.js')()
 
-// app.use(sanitizeMongo());
+app.use(sanitizeMongo());
 app.use(express.json());
 //basic path. not final
 // app.use()
