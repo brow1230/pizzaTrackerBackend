@@ -8,7 +8,7 @@ router.post('/users', sanitizeBody, async(req,res) => {
     try{
         let newUser = new User(req.sanitzedBody)
         const itExists = !!(await User.countDocuments({
-            user: newUser.email
+            email: newUser.email
         }))
         debug("Does it exist " + itExists)
         if (itExists){
@@ -26,7 +26,7 @@ router.post('/users', sanitizeBody, async(req,res) => {
         }
         await newUser.save()
         res.status(201).send({
-            data: `${newUser}`
+            user: `${newUser}`
         })
     }catch (err){
         res.status(500).send({
