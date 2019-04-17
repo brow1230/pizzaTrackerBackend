@@ -37,7 +37,7 @@ router.post('/users', sanitizeBody, async(req,res) => {
         })
     }
 })
-router.patch('/users', sanitzeBody, async(req,res) => {
+router.patch('/users', sanitizeBody, async(req,res) => {
     try{
         let newPassword = req.sanitzedBody
         await newPassword.save()
@@ -77,3 +77,4 @@ router.patch('/users', sanitzeBody, async(req,res) => {
 //     res.send({data:user})
 // })
 
+module.exports = router
