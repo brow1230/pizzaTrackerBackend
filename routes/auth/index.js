@@ -26,7 +26,7 @@ router.post('/users', sanitizeBody, async(req,res) => {
         }
         await newUser.save()
         res.status(201).send({
-            user: `${newUser}`
+            user: newUser
         })
     }catch (err){
         res.status(500).send({
