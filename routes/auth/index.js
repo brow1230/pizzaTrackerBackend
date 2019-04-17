@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const User = require('../../data/User')
 const sanitizeBody = require('../../middleware/sanitizeBody')
-// const authorize = require('../../middleware/auth')
+const authorize = require('../../middleware/auth')
 
 
 router.post('/users', sanitizeBody, async(req,res) => {
