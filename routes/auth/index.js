@@ -39,28 +39,59 @@ router.post('/users', sanitizeBody, async(req,res) => {
     }
 })
 
-router.patch('/users', sanitizeBody, authorize, async(req,res) => {
+const update = (overwrite = false) => async (req,res) => { 
     try{
-        // const user = await User.findOneAndUpdate({email:})
-        // debug(user)
+        // debug(req.sanitizedBody)
 
-        //start here ^^^^
-
-        // let newPassword = req.sanitzedBody
-        // await newPassword.save()
-        res.status(201).send({
-            data: 'Password Changed'
-        })
-    }catch (err){
-        res.status(500).send({
-            errors: [{
-                status: 'Internal Server Error',
-                code: '500',
-                title: 'Problem Saving document to the database.'
-            }]
+        const user = await User.findOneAndUpdate(
+            req.sanitzedBody.email,
+            req.sanitzedBody.password,
+            {
+                new:true,
+                overwrite,
+                runValidators:true
+            }
+        )
+        res.status(200).send({
+            data:user       
         })
     }
-})
+    catch(err) {
+        debug(err)
+        res.status(404).send({
+            data: "error" + err
+        })    }
+}
+
+router.patch('/users', sanitizeBody, authorize, update((overwrite = false))); 
+
+// router.patch('/users', sanitizeBody, authorize, async(req,res) => {
+//     try{
+//         debug(req.sanitzedBody.email)
+
+
+//         // const user = await User.findOneAndUpdate({
+//         //     email:sanitzedBody.email,
+//         //     password: sanitizedBody.password
+//         // })
+//         // debug('user :' + user)
+//         // console.log('hello')
+
+//         // let newPassword = req.sanitzedBody
+//         // await newPassword.save()
+//         res.status(201).send({
+//             data: 'Password Changed'
+//         })
+//     }catch (err){
+//         res.status(500).send({
+//             errors: [{
+//                 status: 'Internal Server Error',
+//                 code: '500',
+//                 title: 'Problem Saving document to the database.'
+//             }]
+//         })
+//     }
+// })
 
 router.post('/users/token', sanitizeBody, async(req,res) => {
     const {email, password} = req.sanitzedBody
