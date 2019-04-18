@@ -26,7 +26,7 @@ router.post('/users', sanitizeBody, async(req,res) => {
         }
         await newUser.save()
         res.status(201).send({
-            user: newUser
+            data: newUser
         })
     }catch (err){
         res.status(500).send({
@@ -71,6 +71,7 @@ router.post('/users/token', sanitizeBody, async(req,res) => {
             ]
         })
     }
+    res.send({data: user.generateAuthToken()})
 })
 
 router.get('/users/me', authorize ,async(req,res) =>{

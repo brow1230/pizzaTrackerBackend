@@ -27,6 +27,8 @@ schema.statics.authenticate = async function (email, password) {
         ? user.password
         :`$2b$${saltrounds}$invalidusernameaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`
     const passwordMatched = await bcrypt.compare(password, hashedPassword)
+    debug(hashedPassword)
+    debug(passwordMatched)
     return passwordMatched
         ? user
         : null
