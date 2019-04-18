@@ -39,10 +39,15 @@ router.post('/users', sanitizeBody, async(req,res) => {
     }
 })
 
-router.patch('/users', sanitizeBody, async(req,res) => {
+router.patch('/users', sanitizeBody, authorize, async(req,res) => {
     try{
-        let newPassword = req.sanitzedBody
-        await newPassword.save()
+        // const user = await User.findOneAndUpdate({email:})
+        // debug(user)
+
+        //start here ^^^^
+
+        // let newPassword = req.sanitzedBody
+        // await newPassword.save()
         res.status(201).send({
             data: 'Password Changed'
         })
