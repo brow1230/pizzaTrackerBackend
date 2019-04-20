@@ -12,7 +12,8 @@ app.use(express.json());
 // app.use()
 app.use('/api/auth', require('./routes/auth/index'))
 app.use('/api/ingredients', require('./routes/ingredientsRouter'))
-app.use('/api/pizzas', require('./routes/pizzaRouter.js'))
+app.use('/api/pizzas', require('./routes/pizzaRouter'))
+app.use('/api/orders', require('./routes/ordersRouter'))
 //other path here
 //auth path here
 

@@ -32,7 +32,7 @@ module.exports = (req, res, next) => {
   try {
     const payload = jwt.verify(token, jwtPrivateKey)
     req.user = payload
-    debug(req.user)
+    debug("UserID", req.user._id)
     next()
   } catch (err) {
     res.status(400).send({
