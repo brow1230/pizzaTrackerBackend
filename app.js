@@ -10,8 +10,9 @@ app.use(sanitizeMongo());
 app.use(express.json());
 //basic path. not final
 // app.use()
-// app.use('/api/path', require('./routes/pizzaRouter.js'))
 app.use('/api/auth', require('./routes/auth/index'))
+app.use('/api/ingredients', require('./routes/ingredientsRouter'))
+app.use('/api/pizzas', require('./routes/pizzaRouter.js'))
 //other path here
 //auth path here
 
