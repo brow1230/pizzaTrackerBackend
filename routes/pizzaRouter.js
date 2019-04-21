@@ -25,6 +25,42 @@ router.get('/:id', async function (req,res){
     }
 })
 
+router.post('/', sanitizeBody, authorize, async (req,res) => {
+    try{
+        let newPizza = new Pizza(req.sanitizedBody)
+        debug(newPizza)
+        const itExists = !!(await Pizza.countDocuments({
+            name: newPizza.name
+        }))
+        debug("Does it exist " + itExists)
+        if (itExists){
+            return res.status(400).send({
+                errors: [{
+                    status: 'Bad Request',
+                    code: '400',
+                    title: 'Validation Error',
+                    detail: `There already is a '${newPizza.name}' pizza.`,
+                    source: {
+                        pointer: '/data/attributes/email'
+                    }
+                }]
+            })
+        }
+        await newPizza.save()
+        res.status(201).send({
+            data: newPizza
+        })
+    }catch (err){
+        debug(err)
+        res.status(500).send({
+            errors: [{
+                status: 'Internal Server Error',
+                code: '500',
+                title: 'Problem Saving document to the database.'
+            }]
+        })
+    }})
+
 const update = (overwrite = false) => async (req,res) => { 
     try{
         const pizza = await Pizza.findOneAndUpdate(

@@ -33,8 +33,8 @@ module.exports = (req,res,next) => {
     debug({body: req.body})
     const {id, _id, ...attributes} = req.body
     debug(attributes)
-    const sanitzedBody = stripTags(attributes)
-    debug(sanitzedBody);
-    req.sanitzedBody = sanitzedBody
+    const sanitizedBody = stripTags(attributes)
+    debug(sanitizedBody);
+    req.sanitizedBody = sanitizedBody
     next();
 }

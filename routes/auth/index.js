@@ -9,7 +9,7 @@ const debug = require('debug')('app:authRouter')
 ///
 router.post('/users', sanitizeBody, async(req,res) => {
     try{
-        let newUser = new User(req.sanitzedBody)
+        let newUser = new User(req.sanitizedBody)
         const itExists = !!(await User.countDocuments({
             email: newUser.email
         }))
@@ -48,8 +48,8 @@ router.post('/users', sanitizeBody, async(req,res) => {
 const update = (overwrite = false) => async (req,res) => { 
     try{
         const user = await User.findOneAndUpdate(
-            req.sanitzedBody.email,
-            req.sanitzedBody.password,
+            req.sanitizedBody.email,
+            req.sanitizedBody.password,
             { new:true, overwrite, runValidators:true }
         )
         res.status(201).send({
@@ -79,7 +79,7 @@ router.patch('/users', sanitizeBody, authorize, update((overwrite = false)));
 //  LOGIN ROUTE
 //
 router.post('/users/token', sanitizeBody, async(req,res) => {
-    const {email, password} = req.sanitzedBody
+    const {email, password} = req.sanitizedBody
     const user = await User.authenticate(email,password)
     if(!user){
         return res.status(404).send({
