@@ -42,7 +42,7 @@ router.get('/:id', authroize, async function(){
     try{
         let order = await Order.findById(req.params._id)
         res.send({
-            data:order
+            data: order
         })
     }catch(err){
         debug(err)
