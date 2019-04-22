@@ -21,7 +21,7 @@ router.get('/', authroize, async function(req,res){
 //POST make an order
 router.post('/',sanitizeBody, authroize, async function (req,res){
     try{
-        let newOrder = new Order(req.sanitizedBody)
+        const newOrder = new Order(req.sanitizedBody)
         await newOrder.save()
         res.status(201).send({
             data: newOrder
@@ -40,7 +40,7 @@ router.post('/',sanitizeBody, authroize, async function (req,res){
 //GET order details
 router.get('/:id', authroize, async function(){
     try{
-        let order = await Order.findById(req.params._id)
+        const order = await Order.findById(req.params._id)
         res.send({
             data: order
         })
