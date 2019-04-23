@@ -2,12 +2,14 @@
 const debug = require('debug')('app')
 const sanitizeMongo = require("express-mongo-sanitize");
 const express = require('express');
+const cors = require('cors')
 const app = express();
 
 require('./startup/database.js')()
 
 app.use(sanitizeMongo());
 app.use(express.json());
+app.use(cors())
 //basic path. not final
 // app.use()
 app.use('/api/auth', require('./routes/auth/index'))
