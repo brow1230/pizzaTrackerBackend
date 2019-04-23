@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const jwtPrivateKey = 'superSecureSecret'
-const debug = require('debug')('app:auth')
-const User = require('../data/User')
+const debug = require('debug')('app: Staff Auth')
+
 
 const parsetoken = header => {
     if (header) {
@@ -34,8 +34,7 @@ module.exports = (req, res, next) => {
     const payload = jwt.verify(token, jwtPrivateKey)
     req.user = payload
 
-    debug("UserID", req.user)
-    // debug(User.find({_id: req.user._id}))
+    debug("User", req.user)
 
     if(!req.user.isStaff){
         res.status(400).send({
@@ -43,10 +42,10 @@ module.exports = (req, res, next) => {
                 status: "Bad Request",
                 code: '400',
                 title: 'Validation Error',
-                description: 'Unauthorized token'
+                description: 'Unauthorized User'
             }]
         })
-        return
+        return //for good luck
     }
     next()
   } catch (err) {

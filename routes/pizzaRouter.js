@@ -1,5 +1,5 @@
 
-const debug = require('debug')('app:pizzaRouter')
+const debug = require('debug')('app: Pizza Router')
 const router = require('express').Router();
 const sanitizeBody = require('../middleware/sanitizeBody');
 const authorize = require('../middleware/auth')

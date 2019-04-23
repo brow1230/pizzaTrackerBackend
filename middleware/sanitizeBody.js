@@ -1,4 +1,4 @@
-const debug = require('debug')('app:sanitizeBody')
+const debug = require('debug')('app: Sanitize Body')
 const xss = require('xss')
 
 const sanitize = sourceString => {

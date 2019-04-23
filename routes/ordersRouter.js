@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const debug = require('debug')('app:ordersRouter')
+const debug = require('debug')('app: Orders Router')
 const sanitizeBody = require('../middleware/sanitizeBody')
 const Order = require('../data/Order')
 const authroize = require('../middleware/auth')

@@ -2,7 +2,7 @@ const router = require('express').Router()
 const Ingredient = require('../data/Ingredient')
 const authorize = require('../middleware/auth')
 const sanitizeBody = require('../middleware/sanitizeBody')
-const debug = require('debug')('app:IngredientsRouter')
+const debug = require('debug')('app: Ingredients Router')
 
 //GET all ingredients
 router.get('/', async function(req,res) {
