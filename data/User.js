@@ -12,11 +12,20 @@ const schema = new mongoose.Schema({
     email: { type: String, required: true, maxlength: 64, trim:true },
     password: { type: String, required: true, maxlength: 512, trim:true },
     isStaff: { type: Boolean, default: false }
-})
+    },
+    {
+        timestamps: {
+            createdAt: "created_at",
+            updatedAt: "updated_at"
+         },
+    }
+
+)
 
 schema.methods.generateAuthToken = function () {
     return jwt.sign({
-        _id: this._id
+        _id: this._id,
+        isStaff: this.isStaff
     }, 'superSecureSecret')
 }
 
@@ -33,6 +42,8 @@ schema.statics.authenticate = async function (email, password) {
         ? user
         : null
 }
+
+
 
 schema.pre('save', async function(next) {
     if(!this.isModified('password'))

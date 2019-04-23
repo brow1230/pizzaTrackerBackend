@@ -3,6 +3,7 @@ const debug = require('debug')('app:pizzaRouter')
 const router = require('express').Router();
 const sanitizeBody = require('../middleware/sanitizeBody');
 const authorize = require('../middleware/auth')
+const authorizeStaff = require('../middleware/staffAuth')
 const Pizza = require('../data/Pizza');
 
 router.get('/', async function(req,res) {
@@ -25,7 +26,7 @@ router.get('/:id', async function (req,res){
     }
 })
 
-router.post('/', sanitizeBody, authorize, async (req,res) => {
+router.post('/', sanitizeBody, authorizeStaff, async (req,res) => {
     try{
         let newPizza = new Pizza(req.sanitizedBody)
         debug(newPizza)
