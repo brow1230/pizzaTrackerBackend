@@ -13,9 +13,10 @@ router.get('/', async function(req,res) {
     })
 })
 
-router.get('/:id', async function (req,res){
+router.get('/:name', async function (req,res){
     try{
-        const pizza = await Pizza.findById(req.params._id)
+        const pizza = await Pizza.findOne({name:req.params.name})
+        debug(pizza)
         res.send({
             data: pizza
         })
@@ -64,27 +65,31 @@ router.post('/', sanitizeBody, authorizeStaff, async (req,res) => {
 
 const update = (overwrite = false) => async (req,res) => { 
     try{
-        const pizza = await Pizza.findOneAndUpdate(
-            req.params._id,
-            req.sanitizedBody.pizza,
+        debug("name: ",req.params.name)
+        const pizza = await Pizza.findOne({name:req.params.name})
+        if(!pizza){
+            throw new Error ('Pizza Not found')
+        }
+        const updatedPizza = await Pizza.findByIdAndUpdate(
+            pizza._id,
+            req.sanitizedBody,
             {
-                new: true,
+                new:true,
                 overwrite,
-                runValidators: true,
+                runValidators:true,
             }
         )
         res.status(201).send({
             data:{
-                order:pizza,
+                pizzaChanged: updatedPizza,
                 message:"Pizza Successfully Changed"
             }       
         })
-        if(!pizza){
-            throw new Error ('Order Not found')
-        }
-        res.send({data: pizza})
+        debug("pizza object?: ", '\n', updatedPizza)
+        
     }
     catch(err) {
+        debug(err)
         res.status(500).send({
             errors: [{
                 status: 'Internal Server Error',
@@ -95,10 +100,10 @@ const update = (overwrite = false) => async (req,res) => {
     }
 }
 
-router.put('/:id', sanitizeBody, authorize, update((overwrite = true)) )
-router.patch('/:id', sanitizeBody, authorize, update((overwrite = false)) )
+router.put('/:name', sanitizeBody, authorizeStaff, update((overwrite = true)) )
+router.patch('/:name', sanitizeBody, authorizeStaff, update((overwrite = false)) )
 
-router.delete('/:id', authorize, async function() {
+router.delete('/:name', authorizeStaff, async function() {
 
 })
 

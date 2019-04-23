@@ -55,9 +55,9 @@ router.get('/:id', authroize, async function(){
 //UPDATE FUNCTION
 const update = (overwrite = false) => async (req,res) => { 
     try{
-        const order = await Order.findOneAndUpdate(
+        const order = await Order.findByIdAndUpdate(
             req.params._id,
-            req.sanitizedBody.order,
+            req.sanitizedBody,
             {
                 new: true,
                 overwrite,

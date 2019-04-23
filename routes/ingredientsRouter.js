@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Ingredient = require('../data/Ingredient')
 const authorize = require('../middleware/auth')
+const authorizeStaff = require('../middleware/staffAuth')
 const sanitizeBody = require('../middleware/sanitizeBody')
 const debug = require('debug')('app: Ingredients Router')
 
@@ -24,33 +25,70 @@ router.get('/:id', async function(req,res){
     }
 })
 
-router.post('/:id', sanitizeBody, authorize, async function(){
-
+router.post('/', sanitizeBody, authorizeStaff, async function(req,res){
+    try{
+        let newIngredient = new Ingredient(req.sanitizedBody)
+        debug(newIngredient)
+        const itExists = !!(await Ingredient.countDocuments({
+            name: newIngredient.name
+        }))
+        debug("Does it exist " + itExists)
+        if (itExists){
+            return res.status(400).send({
+                errors: [{
+                    status: 'Bad Request',
+                    code: '400',
+                    title: 'Validation Error',
+                    detail: `There already is a '${newIngredient.name}' Ingredient.`,
+                    source: {
+                        pointer: '/data/attributes/email'
+                    }
+                }]
+            })
+        }
+        await newIngredient.save()
+        res.status(201).send({
+            data: newIngredient
+        })
+    }catch (err){
+        debug(err)
+        res.status(500).send({
+            errors: [{
+                status: 'Internal Server Error',
+                code: '500',
+                title: 'Problem Saving document to the database.'
+            }]
+        })
+    }
 })
 
 const update = (overwrite = false) => async (req,res) => { 
     try{
-        const ingredient = await Ingredient.findOneAndUpdate(
-            req.params._id,
-            req.sanitizedBody.ingredient,
+        debug("name: ",req.params.name)
+        const ingredient = await Ingredient.findOne({name:req.params.name})
+        if(!ingredient){
+            throw new Error ('ingredient Not found')
+        }
+        const updatedingredient = await Ingredient.findByIdAndUpdate(
+            ingredient._id,
+            req.sanitizedBody,
             {
-                new: true,
+                new:true,
                 overwrite,
-                runValidators: true,
+                runValidators:true,
             }
         )
         res.status(201).send({
             data:{
-                order: ingredient,
+                ingredientChanged: updatedingredient,
                 message:"ingredient Successfully Changed"
             }       
         })
-        if(!ingredient){
-            throw new Error ('Order Not found')
-        }
-        res.send({data: ingredient})
+        debug("ingredient object?: ", '\n', updatedingredient)
+        
     }
     catch(err) {
+        debug(err)
         res.status(500).send({
             errors: [{
                 status: 'Internal Server Error',
@@ -60,15 +98,14 @@ const update = (overwrite = false) => async (req,res) => {
         })
     }
 }
-
 //router to overwrite existing ingredient
-router.put('/:id', sanitizeBody,authorize,update((overwrite = true)))
+router.put('/:name', sanitizeBody, authorizeStaff,update((overwrite = true)))
 
 //router to update existing ingredient
-router.patch('/:id', sanitizeBody,authorize, update((overwrite = false)))
+router.patch('/:name', sanitizeBody, authorizeStaff, update((overwrite = false)))
 
 //delete an ingredient 
-router.delete('/:id', sanitizeBody,authorize, function(){
+router.delete('/:name', authorizeStaff, async function(){
     const ingredient = req.sanitizedBody
 })
 
