@@ -13,9 +13,9 @@ router.get('/', async function(req,res) {
     })
 })
 
-router.get('/:name', async function (req,res){
+router.get('/:id', async function (req,res){
     try{
-        const pizza = await Pizza.findOne({name:req.params.name})
+        const pizza = await Pizza.findById({_id:req.params.id})
         debug(pizza)
         res.send({
             data: pizza
