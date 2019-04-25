@@ -47,11 +47,12 @@ router.post('/users', sanitizeBody, async(req,res) => {
 //
 const update = (overwrite = false) => async (req,res) => { 
     try{
-        const user = await User.findOneAndUpdate(
-            req.sanitizedBody.email,
-            req.sanitizedBody.password,
+        const user = await User.findByIdAndUpdate(
+            req.user._id,
+            {password:req.sanitizedBody.password},
             { new:true, overwrite, runValidators:true }
         )
+        debug(user)
         res.status(201).send({
             data:{
                 user:user,
