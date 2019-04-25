@@ -47,12 +47,11 @@ router.post('/users', sanitizeBody, async(req,res) => {
 //
 const update = (overwrite = false) => async (req,res) => { 
     try{
-        const user = await User.findByIdAndUpdate(
-            req.user._id,
-            {password:req.sanitizedBody.password},
-            { new:true, overwrite, runValidators:true }
-        )
-        debug(user)
+        const user = await User.findById( req.user._id)
+        user.password = req.sanitizedBody.password 
+        // debug(user.password)
+        await user.save()
+        // debug(user)
         res.status(201).send({
             data:{
                 user:user,
@@ -61,6 +60,7 @@ const update = (overwrite = false) => async (req,res) => {
         })
     }
     catch(err) {
+        debug(err)
         res.status(500).send({
             errors: [{
                 status: 'Internal Server Error',

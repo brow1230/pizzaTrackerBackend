@@ -11,6 +11,10 @@ A11:
 A17:
     Did more router stuff, made the startup file... added some debug statements, test on postman and it's sorta working so far for auth...
 
-fjkdl
+A24:
 
     Password changing sortof works, just saves an unhashed password and dosen't let you log in ever again. Must fix...
+
+A25: 
+
+    Password changing now functional, chaged to use model.save() instead of model.findByIdAndUpdate()
