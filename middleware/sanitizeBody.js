@@ -1,4 +1,4 @@
-const debug = require('debug')('app: Sanitize Body')
+const logger = require('../startup/logger')
 const xss = require('xss')
 
 const sanitize = sourceString => {
@@ -13,14 +13,14 @@ const stripTags = payload => {
     let attributes = {...payload};
     for (let key in attributes){
         if(attributes[key] instanceof Array){
-            debug('recursive Array', attributes[key])
+            logger.log('info','recursive Array', attributes[key])
             attributes[key] = attributes[key].map(element => {
                 return typeof element === 'string'
                 ? sanitize(element)
                 : stripTags(element) 
             })
         }else if (attributes[key] instanceof Object){
-            debug('recursive Object', attributes[key])
+            logger.log('info','recursive Object', attributes[key])
             attributes[key] = stripTags(attributes[key])
         }else{
             attributes[key] = sanitize(attributes[key])
@@ -30,11 +30,11 @@ const stripTags = payload => {
 }
 
 module.exports = (req,res,next) => {
-    debug({body: req.body})
+    logger.log('info',{body: req.body})
     const {id, _id, ...attributes} = req.body
-    debug(attributes)
+    logger.log('info',attributes)
     const sanitizedBody = stripTags(attributes)
-    debug(sanitizedBody);
+    logger.log('info',sanitizedBody);
     req.sanitizedBody = sanitizedBody
     next();
 }

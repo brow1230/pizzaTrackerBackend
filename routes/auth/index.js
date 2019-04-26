@@ -2,7 +2,7 @@ const router = require('express').Router()
 const User = require('../../data/User')
 const sanitizeBody = require('../../middleware/sanitizeBody')
 const authorize = require('../../middleware/auth')
-const debug = require('debug')('app:authRouter')
+const logger = require('../../startup/logger')
 
 ///
 /// SIGN UP PAGE
@@ -49,9 +49,7 @@ const update = (overwrite = false) => async (req,res) => {
     try{
         const user = await User.findById( req.user._id)
         user.password = req.sanitizedBody.password 
-        // debug(user.password)
         await user.save()
-        // debug(user)
         res.status(201).send({
             data:{
                 user:user,
@@ -60,7 +58,7 @@ const update = (overwrite = false) => async (req,res) => {
         })
     }
     catch(err) {
-        debug(err)
+        logger.log('error',err)
         res.status(500).send({
             errors: [{
                 status: 'Internal Server Error',

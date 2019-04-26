@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken')
 const jwtPrivateKey = 'superSecureSecret'
-const debug = require('debug')('app: Staff Auth')
+const logger = require('../startup/logger')
 
 
 const parsetoken = header => {
     if (header) {
         const [type,token] = header.split(' ')
-        if(type === 'bearer' && typeof token !== 'undefined'){
+        if(type === 'Bearer' && typeof token !== 'undefined'){
             return token
         }
         return undefined
@@ -15,8 +15,7 @@ const parsetoken = header => {
 
 
 module.exports = (req, res, next) => {
-  const token = req.header('bearer')
-  debug(token)
+  const token = parsetoken(req.header('Authorization'))
   if (!token) {
     return res.status(401).send({
       errors: [
@@ -33,9 +32,7 @@ module.exports = (req, res, next) => {
   try {
     const payload = jwt.verify(token, jwtPrivateKey)
     req.user = payload
-
-    debug("User", req.user)
-
+    
     if(!req.user.isStaff){
         res.status(400).send({
             errors:[{

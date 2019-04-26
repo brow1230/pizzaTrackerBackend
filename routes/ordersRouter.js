@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const debug = require('debug')('app: Orders Router')
+const logger = require('../startup/logger')
 const sanitizeBody = require('../middleware/sanitizeBody')
 const Order = require('../data/Order')
 const authroize = require('../middleware/auth')
@@ -45,7 +45,7 @@ router.get('/:id', authroize, async function(){
             data: order
         })
     }catch(err){
-        debug(err)
+        logger.log('error',err)
         res.send({
             data:"error...checkconsole."
         })

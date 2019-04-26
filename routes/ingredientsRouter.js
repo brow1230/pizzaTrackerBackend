@@ -3,8 +3,7 @@ const Ingredient = require('../data/Ingredient')
 const authorize = require('../middleware/auth')
 const authorizeStaff = require('../middleware/staffAuth')
 const sanitizeBody = require('../middleware/sanitizeBody')
-const debug = require('debug')('app: Ingredients Router')
-
+const logger = require('../startup/logger')
 //GET all ingredients
 router.get('/', async function(req,res) {
     const ingredients = await Ingredient.find()
@@ -21,18 +20,18 @@ router.get('/:id', async function(req,res){
     }
     catch(err){
         resourceNotFound(req,res)
-        debug(err)
+        logger.log('error',err)
     }
 })
 
 router.post('/', sanitizeBody, authorizeStaff, async function(req,res){
     try{
         let newIngredient = new Ingredient(req.sanitizedBody)
-        debug(newIngredient)
+        logger.log('info', newIngredient)
         const itExists = !!(await Ingredient.countDocuments({
             name: newIngredient.name
         }))
-        debug("Does it exist " + itExists)
+        logger.log('info', "Does it exist " + itExists)
         if (itExists){
             return res.status(400).send({
                 errors: [{
@@ -51,7 +50,7 @@ router.post('/', sanitizeBody, authorizeStaff, async function(req,res){
             data: newIngredient
         })
     }catch (err){
-        debug(err)
+        logger.log('error',err)
         res.status(500).send({
             errors: [{
                 status: 'Internal Server Error',
@@ -64,7 +63,7 @@ router.post('/', sanitizeBody, authorizeStaff, async function(req,res){
 
 const update = (overwrite = false) => async (req,res) => { 
     try{
-        debug("name: ",req.params.name)
+        logger.log('info',"name: ",req.params.name)
         const ingredient = await Ingredient.findOne({name:req.params.name})
         if(!ingredient){
             throw new Error ('ingredient Not found')
@@ -84,11 +83,11 @@ const update = (overwrite = false) => async (req,res) => {
                 message:"ingredient Successfully Changed"
             }       
         })
-        debug("ingredient object?: ", '\n', updatedingredient)
+        logger.log('info',"ingredient object?: ", '\n', updatedingredient)
         
     }
     catch(err) {
-        debug(err)
+        logger.log('error',err)
         res.status(500).send({
             errors: [{
                 status: 'Internal Server Error',
@@ -105,9 +104,9 @@ router.put('/:name', sanitizeBody, authorizeStaff,update((overwrite = true)))
 router.patch('/:name', sanitizeBody, authorizeStaff, update((overwrite = false)))
 
 //delete an ingredient 
-router.delete('/:id', authorizeStaff, async function(req,res){
+router.delete('/:id', authorizeStaff, async function(){
     try{
-        debug("Ingredient ID"+req.params.id)
+        logger.log('info',"Ingredient ID"+req.params.id)
         await Ingredient.findByIdAndDelete(req.params.id)
         res.status(200).send({
             data:{
@@ -115,7 +114,7 @@ router.delete('/:id', authorizeStaff, async function(req,res){
             }
         })
     }catch(err){
-        debug(err)
+        logger.log('error',err)
         resourceNotFound(req,res)
     }})
 

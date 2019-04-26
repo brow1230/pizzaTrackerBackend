@@ -1,16 +1,17 @@
-const debug = require('debug')('app:db')
-const mongoose = require('mongoose')
-
+const logger = require('../startup/logger')
+const config = require('config')
 module.exports = () => {
+    const mongoose = require('mongoose')
+    const dbconfig = config.get('db')
     mongoose.connect(
-        `mongodb://localhost:27017/mad9124`,
+        `mongodb://${dbconfig.host}:${dbconfig.port}/${dbconfig.dbName}`,
         {useNewUrlParser:true}
     )
     .then(()=>{
-        debug('connected to MongoDB ...')
+        logger.log('info','connected to MongoDB ...')
     })
     .catch((err) =>{
-        debug('error connecting to MongoDB: ', err)
+        logger.log('error','error connecting to MongoDB: ', err)
         process.exit(1)
     })
 }

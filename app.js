@@ -1,10 +1,9 @@
 'use strict'
-const debug = require('debug')('app')
+const logger = require('./startup/logger')
 const sanitizeMongo = require("express-mongo-sanitize");
 const express = require('express');
 const cors = require('cors')
 const app = express();
-
 require('./startup/database.js')()
 
 app.use(sanitizeMongo());
@@ -21,4 +20,4 @@ app.use('/api/orders', require('./routes/ordersRouter'))
 
 
 const port = process.env.PORT || 3030
-app.listen(port, () => {debug(`app.js started, Listening on port ${port}`)} )
+app.listen(port, () => {logger.log('info',`app.js started, Listening on port ${port}`)} )
