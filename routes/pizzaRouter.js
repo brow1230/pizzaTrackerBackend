@@ -103,8 +103,19 @@ const update = (overwrite = false) => async (req,res) => {
 router.put('/:name', sanitizeBody, authorizeStaff, update((overwrite = true)) )
 router.patch('/:name', sanitizeBody, authorizeStaff, update((overwrite = false)) )
 
-router.delete('/:name', authorizeStaff, async function() {
-
+router.delete('/:id', authorizeStaff, async function(req,res) {
+    try{
+        debug(req.params.id)
+        await Pizza.findByIdAndDelete(req.params.id)
+        res.status(200).send({
+            data:{
+                messge:"pizza deleted"
+            }
+        })
+    }catch(err){
+        debug(err)
+        resourceNotFound(req,res)
+    }
 })
 
 function resourceNotFound(req,res) {

@@ -105,9 +105,19 @@ router.put('/:name', sanitizeBody, authorizeStaff,update((overwrite = true)))
 router.patch('/:name', sanitizeBody, authorizeStaff, update((overwrite = false)))
 
 //delete an ingredient 
-router.delete('/:name', authorizeStaff, async function(){
-    const ingredient = req.sanitizedBody
-})
+router.delete('/:id', authorizeStaff, async function(req,res){
+    try{
+        debug("Ingredient ID"+req.params.id)
+        await Ingredient.findByIdAndDelete(req.params.id)
+        res.status(200).send({
+            data:{
+                messge:"ingredient deleted"
+            }
+        })
+    }catch(err){
+        debug(err)
+        resourceNotFound(req,res)
+    }})
 
 
 function resourceNotFound(req,res) {

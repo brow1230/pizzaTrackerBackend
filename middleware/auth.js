@@ -5,7 +5,7 @@ const debug = require('debug')('app:auth')
 const parsetoken = header => {
     if (header) {
         const [type,token] = header.split(' ')
-        if(type === 'bearer' && typeof token !== 'undefined'){
+        if(type === 'Bearer' && typeof token !== 'undefined'){
             return token
         }
         return undefined
@@ -14,7 +14,8 @@ const parsetoken = header => {
 
 
 module.exports = (req, res, next) => {
-  const token = req.header('bearer')
+
+  const token = parsetoken(req.header('Authorization'))
   debug(token)
   if (!token) {
     return res.status(401).send({
