@@ -19,5 +19,5 @@ app.use('/api/orders', require('./routes/ordersRouter'))
 //auth path here
 
 
-const port = process.env.PORT || 3030
+const port = process.env.PORT || 8080
 app.listen(port, () => {logger.log('info',`app.js started, Listening on port ${port}`)} )

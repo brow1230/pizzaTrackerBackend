@@ -1,10 +1,12 @@
 {
-    "name": "Pizza Tracker Backend",
+    "name": "final=brow1230-verv0022",
     "db": {
-      "host": "localhost",
-      "port": "27017",
-      "dbName": "mad9124"
-    },
+        "host": "mongodb.mad9124.rocks",
+        "port": "27017",
+        "name": "final-brow1230-verv0022",
+        "user": "brow1230-verv0022",
+        "password": "hus87zwuwkg8aa1wea1c0zm62ti5x1"
+        },
     "jwt": {
       "saltRounds": 14
     }

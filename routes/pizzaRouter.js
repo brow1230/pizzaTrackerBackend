@@ -7,10 +7,14 @@ const authorizeStaff = require('../middleware/staffAuth')
 const Pizza = require('../data/Pizza');
 
 router.get('/', async function(req,res) {
-    const pizza = await Pizza.find()
-    res.send({
-        data:pizza
-    })
+    try{
+            const pizza = await Pizza.find()
+        res.send({
+            data:pizza
+        })
+    }catch(err){
+        logger.log("error",err)
+    }
 })
 
 router.get('/:id', async function (req,res){

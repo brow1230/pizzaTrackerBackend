@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const config = require('config').get('jwt')
 const saltrounds = config.saltrounds;
 const logger = require('../startup/logger')
