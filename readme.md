@@ -18,3 +18,7 @@ A24:
 A25: 
 
     Password changing now functional, chaged to use model.save() instead of model.findByIdAndUpdate()
+
+A27: 
+
+    Got it connecting to Robert's Database.. Still not getting any responses from it 

@@ -3,12 +3,15 @@ const config = require('config')
 module.exports = () => {
     const mongoose = require('mongoose')
     const dbconfig = config.get('db')
-    let credentials = `${dbconfig.user}:${dbconfig.password}`
+    let credentials = ""
+    if(process.env.NODE_ENV === 'production'){
+        credentials = `${dbconfig.user}:${dbconfig.password}@`
+    }
     logger.log(
         'info', credentials
     )
     mongoose.connect(
-        `mongodb://${credentials}@${dbconfig.host}:${dbconfig.port}/${dbconfig.dbName}?authSource=admin`,
+        `mongodb://${credentials}${dbconfig.host}:${dbconfig.port}/${dbconfig.name}?authSource=admin`,
         {useNewUrlParser:true}
     )
     .then(()=>{

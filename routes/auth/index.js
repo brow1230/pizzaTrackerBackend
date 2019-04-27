@@ -13,7 +13,8 @@ router.post('/users', sanitizeBody, async(req,res) => {
         const itExists = !!(await User.countDocuments({
             email: newUser.email
         }))
-        debug("Does it exist " + itExists)
+        logger.log("info","Does it exist " + itExists)
+        logger.log("info","New User is " + newUser)
         if (itExists){
             return res.status(400).send({
                 errors: [{
@@ -32,9 +33,11 @@ router.post('/users', sanitizeBody, async(req,res) => {
             data: newUser
         })
     }catch (err){
+        logger.log("error", err)
         res.status(500).send({
             errors: [{
                 status: 'Internal Server Error',
+                error: err,
                 code: '500',
                 title: 'Problem Saving document to the database.'
             }]

@@ -99,3 +99,59 @@
 {"level":"info","message":"brow1230-verv0022:hus87zwuwkg8aa1wea1c0zm62ti5x1"}
 {"level":"info","message":"app.js started, Listening on port 8080"}
 {"level":"info","message":"connected to MongoDB ..."}
+{"level":"info","message":"brow1230-verv0022:hus87zwuwkg8aa1wea1c0zm62ti5x1"}
+{"level":"info","message":"app.js started, Listening on port 8080"}
+{"level":"info","message":"connected to MongoDB ..."}
+{"level":"info","message":"brow1230-verv0022:hus87zwuwkg8aa1wea1c0zm62ti5x1"}
+{"level":"info","message":"app.js started, Listening on port 8080"}
+{"level":"info","message":"connected to MongoDB ..."}
+{"ok":0,"errmsg":"not authorized on undefined to execute command { find: \"pizzas\", filter: {}, projection: {}, returnKey: false, showRecordId: false, $db: \"undefined\" }","code":13,"codeName":"Unauthorized","name":"MongoError","level":"error","service":"user-service"}
+{"level":"info","message":"brow1230-verv0022:hus87zwuwkg8aa1wea1c0zm62ti5x1"}
+{"level":"info","message":"app.js started, Listening on port 3030"}
+{"level":"info","message":"connected to MongoDB ..."}
+{"ok":0,"errmsg":"not authorized on undefined to execute command { find: \"pizzas\", filter: {}, projection: {}, returnKey: false, showRecordId: false, $db: \"undefined\" }","code":13,"codeName":"Unauthorized","name":"MongoError","level":"error","service":"user-service"}
+{"level":"info","message":"brow1230-verv0022:hus87zwuwkg8aa1wea1c0zm62ti5x1@"}
+{"level":"info","message":"app.js started, Listening on port 3030"}
+{"level":"info","message":"connected to MongoDB ..."}
+{"ok":0,"errmsg":"not authorized on mad9124 to execute command { find: \"pizzas\", filter: {}, projection: {}, returnKey: false, showRecordId: false, $db: \"mad9124\" }","code":13,"codeName":"Unauthorized","name":"MongoError","level":"error","service":"user-service"}
+{"level":"info","message":"brow1230-verv0022:hus87zwuwkg8aa1wea1c0zm62ti5x1@"}
+{"level":"info","message":"app.js started, Listening on port 3030"}
+{"level":"info","message":"connected to MongoDB ..."}
+{"level":"info","message":"brow1230-verv0022:hus87zwuwkg8aa1wea1c0zm62ti5x1@"}
+{"level":"info","message":"app.js started, Listening on port 3030"}
+{"level":"info","message":"connected to MongoDB ..."}
+{"body":{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":true},"level":"info","service":"user-service"}
+{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":true,"level":"info","service":"user-service"}
+{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":"true","level":"info","service":"user-service"}
+{"level":"info","message":"brow1230-verv0022:hus87zwuwkg8aa1wea1c0zm62ti5x1@"}
+{"level":"info","message":"app.js started, Listening on port 3030"}
+{"level":"info","message":"connected to MongoDB ..."}
+{"body":{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":true},"level":"info","service":"user-service"}
+{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":true,"level":"info","service":"user-service"}
+{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":"true","level":"info","service":"user-service"}
+{"level":"info","message":"Does it exist false"}
+{"level":"info","message":"New User is { isStaff: true,\n  _id: 5cc49e28b141e708f57e2693,\n  firstName: 'David',\n  lastName: 'Brown',\n  email: 'abc@example.com',\n  password: 'a' }"}
+{"body":{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":true},"level":"info","service":"user-service"}
+{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":true,"level":"info","service":"user-service"}
+{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":"true","level":"info","service":"user-service"}
+{"level":"info","message":"Does it exist false"}
+{"level":"info","message":"New User is { isStaff: true,\n  _id: 5cc49e7cb141e708f57e2694,\n  firstName: 'David',\n  lastName: 'Brown',\n  email: 'abc@example.com',\n  password: 'a' }"}
+{"body":{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":true},"level":"info","service":"user-service"}
+{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":true,"level":"info","service":"user-service"}
+{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":"true","level":"info","service":"user-service"}
+{"level":"info","message":"Does it exist false"}
+{"level":"info","message":"New User is { isStaff: true,\n  _id: 5cc49e84b141e708f57e2695,\n  firstName: 'David',\n  lastName: 'Brown',\n  email: 'abc@example.com',\n  password: 'a' }"}
+{"body":{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":true},"level":"info","service":"user-service"}
+{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":true,"level":"info","service":"user-service"}
+{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":"true","level":"info","service":"user-service"}
+{"level":"info","message":"Does it exist false"}
+{"level":"info","message":"New User is { isStaff: true,\n  _id: 5cc49eb6b141e708f57e2696,\n  firstName: 'David',\n  lastName: 'Brown',\n  email: 'abc@example.com',\n  password: 'a' }"}
+{"level":"info","message":"brow1230-verv0022:hus87zwuwkg8aa1wea1c0zm62ti5x1@"}
+{"level":"info","message":"app.js started, Listening on port 3030"}
+{"level":"info","message":"connected to MongoDB ..."}
+{"body":{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":true},"level":"info","service":"user-service"}
+{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":true,"level":"info","service":"user-service"}
+{"firstName":"David","lastName":"Brown","email":"abc@example.com","password":"a","isStaff":"true","level":"info","service":"user-service"}
+{"level":"info","message":"Does it exist false"}
+{"level":"info","message":"New User is { isStaff: true,\n  _id: 5cc49ebce48a5f0924f0de5a,\n  firstName: 'David',\n  lastName: 'Brown',\n  email: 'abc@example.com',\n  password: 'a' }"}
+{"level":"error","service":"user-service"}
