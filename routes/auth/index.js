@@ -52,6 +52,7 @@ router.post('/users', sanitizeBody, async(req,res) => {
 const update = (overwrite = false) => async (req,res) => { 
     try{
         const user = await User.findById( req.user._id)
+        // logger.log("info", "User requesting new password: "+ req.sanitizedBody)
         user.password = req.sanitizedBody.password 
         await user.save()
         res.status(201).send({
@@ -98,11 +99,11 @@ router.post('/users/token', sanitizeBody, async(req,res) => {
     res.send({data: user.generateAuthToken()})
 })
 
-// password is joepapa
+// password is password2
 //  USER PROFILE ROUTE
 //
 router.get('/users/me', authorize ,async(req,res) =>{
-    console.log(req.user.id)
+    console.log(req.user)
     const user = await User.findById(req.user._id)
     res.send({data:user})
 })

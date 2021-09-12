@@ -30,11 +30,13 @@ const stripTags = payload => {
 }
 
 module.exports = (req,res,next) => {
-    logger.log('info',{body: req.body})
+    // logger.log('info',{body: req.body})
     const {id, _id, ...attributes} = req.body
-    logger.log('info',attributes)
+    // logger.log('info',attributes)
     const sanitizedBody = stripTags(attributes)
-    logger.log('info',sanitizedBody);
+    // logger.log('info',sanitizedBody);
     req.sanitizedBody = sanitizedBody
+    console.log("Sanitization Module: ", req.sanitizedBody)
+    // logger.log("info","body: "+ req.sanitizedBody )
     next();
 }
