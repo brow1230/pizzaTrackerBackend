@@ -28,6 +28,7 @@ router.post('/users', sanitizeBody, async(req,res) => {
                 }]
             })
         }
+        logger.log("info","About to save")
         await newUser.save()
         res.status(201).send({
             data: newUser
@@ -97,10 +98,11 @@ router.post('/users/token', sanitizeBody, async(req,res) => {
     res.send({data: user.generateAuthToken()})
 })
 
-//
+// password is joepapa
 //  USER PROFILE ROUTE
 //
 router.get('/users/me', authorize ,async(req,res) =>{
+    console.log(req.user.id)
     const user = await User.findById(req.user._id)
     res.send({data:user})
 })

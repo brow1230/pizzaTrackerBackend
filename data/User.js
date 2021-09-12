@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const config = require('config').get('jwt')
-const saltrounds = config.saltrounds;
+const saltrounds = config.saltRounds;
 const logger = require('../startup/logger')
 
 
@@ -32,12 +32,12 @@ schema.methods.generateAuthToken = function () {
 
 schema.statics.authenticate = async function (email, password) {
     const user = await this.findOne({ email: email })
-    logger.log('info',user)
+    // logger.log('info',user)
     const hashedPassword = user 
         ? user.password
         :`$2b$${saltrounds}$invalidusernameaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`
     const passwordMatched = await bcrypt.compare(password, hashedPassword)
-    logger.log('info', 'passwords matched: '+ passwordMatched)
+    // logger.log('info', 'passwords matched: '+ passwordMatched)
     return passwordMatched
         ? user
         : null

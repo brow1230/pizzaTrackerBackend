@@ -1,10 +1,14 @@
 const jwt = require('jsonwebtoken')
+const logger = require('../startup/logger')
 const jwtPrivateKey = 'superSecureSecret'
 
+// Currently broken, only returns `undefined`
 const parsetoken = header => {
     if (header) {
+      logger.log('info',header)
+      
         const [type,token] = header.split(' ')
-        if(type === 'Bearer' && typeof token !== 'undefined'){
+        if(type === 'bearer' && typeof token !== 'undefined'){
             return token
         }
         return undefined
@@ -13,9 +17,12 @@ const parsetoken = header => {
 
 
 module.exports = (req, res, next) => {
-
-  const token = parsetoken(req.header('Authorization'))
+  // logger.log('info',req.header)
+  // logger.log('info',req.headers )
+  // const token = parsetoken(req.headers)
+  const token = req.header('bearer')
   if (!token) {
+    logger.log('info',"Bearer Token is: "+ token)
     return res.status(401).send({
       errors: [
         {

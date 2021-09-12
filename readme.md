@@ -22,3 +22,8 @@ A25:
 A27: 
 
     Got it connecting to Robert's Database.. Still not getting any responses from it 
+
+
+September 2021: 
+    Fixed Saltrounds - password encryption on signup now works as expected
+    Removed `Parse Token` in favour of specifically pulling `bearer token` 

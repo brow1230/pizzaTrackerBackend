@@ -9,3 +9,33 @@
 {"ok":0,"errmsg":"not authorized on undefined to execute command { find: \"pizzas\", filter: {}, projection: {}, returnKey: false, showRecordId: false, $db: \"undefined\" }","code":13,"codeName":"Unauthorized","name":"MongoError","level":"error","service":"user-service"}
 {"ok":0,"errmsg":"not authorized on mad9124 to execute command { find: \"pizzas\", filter: {}, projection: {}, returnKey: false, showRecordId: false, $db: \"mad9124\" }","code":13,"codeName":"Unauthorized","name":"MongoError","level":"error","service":"user-service"}
 {"level":"error","service":"user-service"}
+{"service":"user-service","errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":27017,"level":"error","message":"error connecting to MongoDB: connect ECONNREFUSED 127.0.0.1:27017","stack":"Error: connect ECONNREFUSED 127.0.0.1:27017\n    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1117:14)"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
